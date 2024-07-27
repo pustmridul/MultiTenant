@@ -6,3 +6,5 @@ global using Domain.Entity;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
+global using Application.Common.Models;
+global using Application.Common.Mappings;
