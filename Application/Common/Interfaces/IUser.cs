@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application
+namespace Application.Common.Interfaces;
+
+public interface IUser
 {
-    public interface IAppDbContext
-    {
-    }
+    string? Id { get; }
 }

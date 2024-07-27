@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Configurations;
 
-public class PaymentConfiguration: IEntityTypeConfiguration<Payment>
+
+public class TenantConfiguration : IEntityTypeConfiguration<Tenant>
 {
-    public void Configure(EntityTypeBuilder<Payment> builder)
+    public void Configure(EntityTypeBuilder<Tenant> builder)
     {
-        builder.ToTable("Payment");
+        builder.ToTable("Tenant");
         builder.HasKey(e => new { e.Id });
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
     }
