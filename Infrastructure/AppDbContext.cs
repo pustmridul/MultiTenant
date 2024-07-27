@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Common.Interfaces;
+using Domain.Entity;
 
-namespace Infrastructure
+namespace Infrastructure;
+
+public class AppDbContext : DbContext, IAppDbContext
 {
-    public class AppDbContext
-    {
-    }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public DbSet<User> Users => Set<User>();
+    public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
+
 }
