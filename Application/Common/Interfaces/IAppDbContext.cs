@@ -5,6 +5,6 @@ namespace Application.Common.Interfaces
     {
         DbSet<User> Users { get; }
         DbSet<PaymentMethod> PaymentMethods { get; }
-
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

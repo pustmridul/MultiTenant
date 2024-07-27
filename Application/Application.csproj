@@ -19,10 +19,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Com\PaymentMethods\Commands\CreatePaymentMethod\" />
-    <Folder Include="Com\PaymentMethods\Commands\DeletePaymentMethod\" />
-    <Folder Include="Com\PaymentMethods\Queries\GetAllPaymentMethod\" />
-  </ItemGroup>
-
 </Project>

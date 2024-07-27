@@ -4,9 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.PaymentMethods.Models
+namespace Application.Com.PaymentMethods.Models;
+public class PaymentMethodDto
 {
-    internal class PaymentMethodDto
+    public int Id { get; init; }
+    public string? Name { get; init; }
+
+    private class Mapping : Profile
     {
+        public Mapping()
+        {
+            CreateMap<PaymentMethod, PaymentMethodDto>();
+        }
     }
 }

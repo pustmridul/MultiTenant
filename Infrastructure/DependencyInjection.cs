@@ -6,6 +6,9 @@ using System.Text;
 using Application.Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
+using Domain.Entity;
 
 namespace Infrastructure;
 public static class DependencyInjection
@@ -26,7 +29,17 @@ public static class DependencyInjection
 
 
         services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
-   
+
+        services
+           .AddIdentityCore<User>()
+           .AddRoles<IdentityRole>()
+           .AddEntityFrameworkStores<AppDbContext>()
+           .AddApiEndpoints();
+        services
+            .AddDefaultIdentity<User>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>();
+        services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddSingleton(TimeProvider.System);
 

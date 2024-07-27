@@ -13,7 +13,9 @@ builder.Services.AddApplicationServices();
 
 builder.Services.AddWebServices();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.AddApplicationServices
