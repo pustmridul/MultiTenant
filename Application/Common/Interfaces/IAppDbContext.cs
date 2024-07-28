@@ -5,6 +5,8 @@ namespace Application.Common.Interfaces
     {
         DbSet<User> Users { get; }
         DbSet<PaymentMethod> PaymentMethods { get; }
+        DbSet<Tenant> Tenants { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+      
     }
 }
