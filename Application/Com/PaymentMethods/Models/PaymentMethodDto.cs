@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ public class PaymentMethodDto
         public Mapping()
         {
             CreateMap<PaymentMethod, PaymentMethodDto>();
+            CreateMap<UpdateTenantMethodCommand, Tenant>();
         }
     }
 }
