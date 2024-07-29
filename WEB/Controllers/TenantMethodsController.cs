@@ -4,6 +4,7 @@ using Application.Com.PaymentMethods.Commands.UpdatePaymentMethod;
 using Application.Com.PaymentMethods.Models;
 using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
 using Application.Com.TenantMethods.Commands.CreateTenantMethod;
+using Application.Com.TenantMethods.Commands.DeleteTenantMethod;
 using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
 using Application.Com.TenantMethods.Models;
 using Application.Com.TenantMethods.Queries.GetTenantMethods;
@@ -44,7 +45,7 @@ namespace WEB.Controllers
         [HttpDelete]
         public async Task<IResult> Delete(int id)
         {
-            await Mediator.Send(new DeletePaymentMethodCommand(id));
+            await Mediator.Send(new DeleteTenantMethodCommand(id));
             return Results.NoContent();
         }
     }
