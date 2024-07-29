@@ -10,7 +10,12 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
     public DbSet<Tenant> Tenants => Set<Tenant>();
-   
+    public DbSet<Invoice> Invoices => Set<Invoice>();
+    public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<Product> Products => Set<Product>();
+    public DbSet<Subscription> Subscriptions => Set<Subscription>();
+    public DbSet<UsageLog> UsageLogs => Set<UsageLog>();
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

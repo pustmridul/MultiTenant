@@ -19,4 +19,31 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Com\Invoice\Models\" />
+    <Folder Include="Com\Invoice\Queries\GetInvoice\" />
+    <Folder Include="Com\Payment\Models\" />
+    <Folder Include="Com\Payment\Queries\GetPayment\" />
+    <Folder Include="Com\Product\Commands\CreateProduct\" />
+    <Folder Include="Com\Product\Commands\DeleteProduct\" />
+    <Folder Include="Com\Product\Commands\UpdateProduct\" />
+    <Folder Include="Com\Product\Models\" />
+    <Folder Include="Com\Product\Queries\GetProduct\" />
+    <Folder Include="Com\Subscription\Commands\CreateSubscription\" />
+    <Folder Include="Com\Subscription\Commands\DeleteSubscription\" />
+    <Folder Include="Com\Subscription\Commands\UpdateSubscription\" />
+    <Folder Include="Com\Subscription\Models\" />
+    <Folder Include="Com\Subscription\Queries\GetSubscription\" />
+    <Folder Include="Com\UsageLog\Commands\CreateUsageLog\" />
+    <Folder Include="Com\UsageLog\Commands\DeleteUsageLog\" />
+    <Folder Include="Com\UsageLog\Commands\UpdateUsageLog\" />
+    <Folder Include="Com\UsageLog\Models\" />
+    <Folder Include="Com\UsageLog\Queries\GetUsageLog\" />
+    <Folder Include="Com\User\Commands\CreateUser\" />
+    <Folder Include="Com\User\Commands\Deleteuser\" />
+    <Folder Include="Com\User\Commands\UpdateUser\" />
+    <Folder Include="Com\User\Models\" />
+    <Folder Include="Com\User\Queries\GetUser\" />
+  </ItemGroup>
+
 </Project>
