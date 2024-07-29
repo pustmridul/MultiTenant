@@ -16,7 +16,6 @@ public class PaymentMethodDto
         public Mapping()
         {
             CreateMap<PaymentMethod, PaymentMethodDto>();
-            CreateMap<UpdateTenantMethodCommand, Tenant>();
         }
     }
 }
