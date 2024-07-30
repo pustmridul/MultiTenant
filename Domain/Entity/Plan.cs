@@ -10,5 +10,8 @@ namespace Domain.Entity
     {
         public string Name { get; set; }= string.Empty;
         public string? Description { get; set; } 
+        public ICollection<Pricing> Pricings { get; set; }
+        public ICollection<PlanFeature> PlanFeatures { get; set; }
+
     }
 }

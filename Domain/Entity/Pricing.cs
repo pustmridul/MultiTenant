@@ -10,5 +10,6 @@ namespace Domain.Entity
     {
         public int PlanId { get; set; }
         public decimal Price { get; set; }
+        public Plan Plan { get; set; }
     }
 }
