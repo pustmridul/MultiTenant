@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Configurations;
 
 
-public class UsageLogConfiguration : IEntityTypeConfiguration<UsageLog>
+public class UsageLogConfiguration : IEntityTypeConfiguration<UserLog>
 {
-    public void Configure(EntityTypeBuilder<UsageLog> builder)
+    public void Configure(EntityTypeBuilder<UserLog> builder)
     {
         builder.ToTable("UsageLog");
         builder.HasKey(e => new { e.UserId });

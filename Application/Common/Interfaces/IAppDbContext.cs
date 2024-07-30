@@ -10,7 +10,7 @@ namespace Application.Common.Interfaces
         DbSet<Payment> Payments { get; }
         DbSet<Product> Products { get; }
         DbSet<Subscription> Subscriptions { get; }
-        DbSet<UsageLog> UsageLogs { get; }
+        DbSet<UserLog> UserLogs { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
       

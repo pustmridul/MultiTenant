@@ -14,7 +14,7 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
-    public DbSet<UsageLog> UsageLogs => Set<UsageLog>();
+    public DbSet<UserLog> UserLogs => Set<UserLog>();
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
