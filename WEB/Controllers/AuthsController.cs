@@ -11,7 +11,7 @@ namespace WEB.Controllers
     public class AuthsController : ApiControllerBase
     {
         [HttpPost]
-        public async Task<int> CreateUser([AsParameters] CreateUserCommand query)
+        public async Task<int> Create([AsParameters] CreateUserCommand query)
         {
             return await Mediator.Send(query);
         }
