@@ -13,27 +13,27 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
 {
     private readonly ILogger _logger;
     private readonly IUser _user;
-    private readonly IIdentityService _identityService;
+    private readonly ICurrentUserService _currentUserService;
 
-    public LoggingBehaviour(ILogger<TRequest> logger, IUser user, IIdentityService identityService)
+    public LoggingBehaviour(ILogger<TRequest> logger, IUser user, ICurrentUserService currentUserService)
     {
         _logger = logger;
         _user = user;
-        _identityService = identityService;
+        _currentUserService = currentUserService;
     }
 
     public async Task Process(TRequest request, CancellationToken cancellationToken)
     {
         var requestName = typeof(TRequest).Name;
-        var userId = _user.Id ?? string.Empty;
+        var userId = _user.Id ;
         string? userName = string.Empty;
 
-        if (!string.IsNullOrEmpty(userId))
+        if (userId!=0)
         {
-            userName = await _identityService.GetUserNameAsync(userId);
+            userName = await _currentUserService.GetUserNameAsync(userId);
         }
 
-        _logger.LogInformation("FlexPosly Request: {Name} {@UserId} {@UserName} {@Request}",
+        _logger.LogInformation("Request: {Name} {@UserId} {@UserName} {@Request}",
             requestName, userId, userName, request);
     }
 }
