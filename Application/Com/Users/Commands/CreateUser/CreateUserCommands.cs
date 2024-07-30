@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Users.Commands.CreateUser;
 
-public record CreateUserCommand : IRequest<int> 
+public record CreateUserCommand : IRequest<string> 
 {
     public string Username { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
@@ -18,7 +19,7 @@ public record CreateUserCommand : IRequest<int>
     public bool IsActive { get; init; }
     public string? ProfilePictureURL { get; init; }
 }
-internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
+internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, string>
 {
     private readonly IAppDbContext _context;
     private readonly IPasswordHash _passwordHash;
@@ -29,7 +30,7 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int
         _passwordHash = passwordHash;
     }
 
-    public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         try {
             var newPassword = new Random(DateTime.UtcNow.Millisecond).Next(1000, 9999);
@@ -49,7 +50,7 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int
                 LastLogin = request.LastLogin,
                 IsActive = request.IsActive,
                 ProfilePictureURL = request.ProfilePictureURL,
-                PasswordHash = request.Password,
+                PasswordHash = newPasswordHash,
                 PasswordSalt = newPasswordSaltHash,
             };
 
@@ -64,7 +65,7 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return entity.Id;
+            return newPassword.ToString();
 
         }
 

@@ -9,7 +9,7 @@ namespace Application.Com.Login.Models
     public class LoginModel
     {
     }
-    public record LoginResponse 
+    public class LoginResponse
     {
         public string AccessToken { get; set; } = string.Empty;
         public string RefreshToken { get; set; }= string.Empty;

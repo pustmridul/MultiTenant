@@ -15,6 +15,9 @@ namespace Application.Common.Interfaces
         DbSet<Plan> Plans { get; }
         DbSet<PlanFeature> PlanFeatures { get; }
         DbSet<Pricing> Pricings { get; }
+        DbSet<Role> Roles { get; }
+        DbSet<UserRole> UserRoles { get; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
       

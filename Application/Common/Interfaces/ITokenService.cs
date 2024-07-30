@@ -6,7 +6,7 @@ namespace Application.Common.Interfaces;
 
 public interface ITokenService
 {
-    JwtSecurityToken GenerateJWToken(User user, string ipAddress, int warehouseId);
+    JwtSecurityToken GenerateJWToken(User user);
     string GenerateRefreshToken();
     ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 }

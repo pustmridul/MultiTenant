@@ -16,8 +16,11 @@ namespace Domain.Entity
         public DateTime LastLogin {  get; set; }
         public bool IsActive { get; set; }
         public string? ProfilePictureURL { get; set; }
-        public string? PasswordHash {  get; set; }
-        public string? PasswordSalt {  get; set; }
+        public string PasswordHash { get; set; } = string.Empty;
+        public string PasswordSalt { get; set; } = string.Empty;
+        public int LoginFailedAttemptCount { get; set; }
+        public DateTime? LastLoginFailedAttemptDate { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
 
     }
 }

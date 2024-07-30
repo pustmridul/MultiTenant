@@ -19,13 +19,13 @@ public class TokenService : ITokenService
     {
         _jwtSettings = jwtSettings.Value;
     }
-    public JwtSecurityToken GenerateJWToken(User user, string ipAddress, int warehouseId)
+    public JwtSecurityToken GenerateJWToken(User user)
     {
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.UserData,JsonSerializer.Serialize(user)),
             new Claim(ClaimTypes.Name, user.Username??""),
-            new Claim("uid", user.Id.ToString()),
+            new Claim("uid", user.Id.ToString()??""),
 
         };
         return JWTGeneration(claims);

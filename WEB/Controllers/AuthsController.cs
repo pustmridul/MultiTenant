@@ -1,4 +1,5 @@
-﻿using Application.Com.PaymentMethods.Models;
+﻿using Application.Com.Login.Commands;
+using Application.Com.PaymentMethods.Models;
 using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
 using Application.Com.Users.Commands.CreateUser;
 using Application.Common.Models;
@@ -11,9 +12,18 @@ namespace WEB.Controllers
     public class AuthsController : ApiControllerBase
     {
         [HttpPost]
-        public async Task<int> CreateUser([AsParameters] CreateUserCommand query)
+        public async Task<IResult> CreateUser(CreateUserCommand query)
         {
-            return await Mediator.Send(query);
+            
+            return Results.Ok(await Mediator.Send(query));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Authenticate(LoginCommand model)
+        {
+            var result = await Mediator.Send(model);
+
+            return Ok(result);
+
         }
     }
 }

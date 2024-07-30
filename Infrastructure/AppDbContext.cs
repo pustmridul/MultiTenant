@@ -19,6 +19,9 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Plan> Plans => Set<Plan>();
     public DbSet<PlanFeature> PlanFeatures => Set<PlanFeature>();
     public DbSet<Pricing> Pricings => Set<Pricing>();
+    public DbSet<Role> Roles => Set<Role>();
+    public DbSet<UserRole> UserRoles => Set<UserRole>();
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
