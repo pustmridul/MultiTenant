@@ -15,18 +15,18 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
     private readonly Stopwatch _timer;
     private readonly ILogger<TRequest> _logger;
     private readonly IUser _user;
-    private readonly IIdentityService _identityService;
+    private readonly ICurrentUserService _currentUserService;
 
     public PerformanceBehaviour(
         ILogger<TRequest> logger,
         IUser user,
-        IIdentityService identityService)
+        ICurrentUserService currentUserService)
     {
         _timer = new Stopwatch();
 
         _logger = logger;
         _user = user;
-        _identityService = identityService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -42,15 +42,15 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
         if (elapsedMilliseconds > 500)
         {
             var requestName = typeof(TRequest).Name;
-            var userId = _user.Id ?? string.Empty;
+            var userId = _user.Id;
             var userName = string.Empty;
 
-            if (!string.IsNullOrEmpty(userId))
+            if (userId!=0)
             {
-                userName = await _identityService.GetUserNameAsync(userId);
+                userName = await _currentUserService.GetUserNameAsync(userId);
             }
 
-            _logger.LogWarning("FlexPosly Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+            _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                 requestName, elapsedMilliseconds, userId, userName, request);
         }
 

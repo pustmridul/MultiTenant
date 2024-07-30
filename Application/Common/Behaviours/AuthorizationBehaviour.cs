@@ -7,14 +7,14 @@ namespace Application.Common.Behaviours;
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
     private readonly IUser _user;
-    private readonly IIdentityService _identityService;
+    private readonly ICurrentUserService _currentUserService;
 
     public AuthorizationBehaviour(
         IUser user,
-        IIdentityService identityService)
+        ICurrentUserService currentUserService)
     {
         _user = user;
-        _identityService = identityService;
+        _currentUserService = currentUserService;
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
         if (authorizeAttributes.Any())
         {
             // Must be authenticated user
-            if (_user.Id == null)
+            if (_user.Id == 0)
             {
                 throw new UnauthorizedAccessException();
             }
@@ -40,7 +40,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
                 {
                     foreach (var role in roles)
                     {
-                        var isInRole = await _identityService.IsInRoleAsync(_user.Id, role.Trim());
+                        var isInRole = await _currentUserService.IsInRoleAsync(_user.Id, role.Trim());
                         if (isInRole)
                         {
                             authorized = true;
@@ -62,7 +62,7 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
             {
                 foreach (var policy in authorizeAttributesWithPolicies.Select(a => a.Policy))
                 {
-                    var authorized = await _identityService.AuthorizeAsync(_user.Id, policy);
+                    var authorized = await _currentUserService.AuthorizeAsync(_user.Id, policy);
 
                     if (!authorized)
                     {

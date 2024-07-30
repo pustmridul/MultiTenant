@@ -32,18 +32,12 @@ public static class DependencyInjection
 
         services.AddScoped<IPasswordHash,PasswordHash>();
         services.AddScoped<ITokenService,TokenService>();
+       
+        services.AddSingleton<IPermissionService, PermissionService>();
+
+        services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
 
-        services
-           .AddIdentityCore<User>()
-           .AddRoles<IdentityRole>()
-           .AddEntityFrameworkStores<AppDbContext>()
-           .AddApiEndpoints();
-        services
-            .AddDefaultIdentity<User>()
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<AppDbContext>();
-        services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddSingleton(TimeProvider.System);
 
