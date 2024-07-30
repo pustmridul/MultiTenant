@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Com.Users.Commands.CreateUser;
 
-public record CreateUserCommand : IRequest<string> // IdentityUser typically uses string as the ID type
+public record CreateUserCommand : IRequest<int> // IdentityUser typically uses string as the ID type
 {
     public string Username { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
@@ -17,25 +18,39 @@ public record CreateUserCommand : IRequest<string> // IdentityUser typically use
     public bool IsActive { get; init; }
     public string? ProfilePictureURL { get; init; }
 }
-internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, string>
+internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
 {
     private readonly IAppDbContext _context;
+    private readonly IPasswordHash _passwordHash;
 
-    public CreateUserCommandHandler( IAppDbContext context)
+    public CreateUserCommandHandler( IAppDbContext context, IPasswordHash passwordHash)
     {
         _context = context;
+        _passwordHash = passwordHash;
     }
 
-    public async Task<string> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
+        // var pas= _passwordHash.CreateHash()
+       
+        var newPassword = new Random(DateTime.UtcNow.Millisecond).Next(1000, 9999);
+
+        string newPasswordHash = string.Empty;
+        string newPasswordSaltHash = string.Empty;
+
+        _passwordHash.CreateHash(newPassword.ToString(CultureInfo.InvariantCulture), ref newPasswordHash,
+            ref newPasswordSaltHash);
+
         var entity = new User
         {
-            UserName = request.Username, // IdentityUser expects UserName
+            Username = request.Username, // IdentityUser expects UserName
             Email = request.Email,
             TenantId = request.TenantId,
             LastLogin = request.LastLogin,
             IsActive = request.IsActive,
-            ProfilePictureURL = request.ProfilePictureURL
+            ProfilePictureURL = request.ProfilePictureURL,
+            PasswordHash = newPasswordHash,
+            PasswordSalt = newPasswordSaltHash,
         };
 
          _context.Users.Add(entity);
