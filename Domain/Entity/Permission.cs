@@ -8,5 +8,7 @@ namespace Domain.Entity
 {
     public class Permission : BaseEntity
     {
+        public int PermissionNo { get; set; }
+        
     }
 }

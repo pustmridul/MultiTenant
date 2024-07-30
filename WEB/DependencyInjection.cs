@@ -4,10 +4,31 @@ using Microsoft.OpenApi.Models;
 using WEB.Handlers;
 using WEB.Services;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+using Domain.Collections;
 
 namespace WEB;
 public static class DependencyInjection
 {
+    public static void AddPermission(this IServiceCollection services)
+    {
+        services.AddAuthorization(options =>
+        {
+            foreach (var apiPermission in RolePermission.ApiPermissions)
+            {
+                options.AddPolicy(apiPermission.Key, policy =>
+                {
+                    foreach (var permission in apiPermission.Value)
+                    {
+                        policy.Requirements.Add(new PermissionRequirement(permission));
+                    }
+                });
+            }
+        });
+
+        services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+
+    }
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
 
