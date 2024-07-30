@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Queries.GetTenantMethods;
 
-public record GetTenantMethodsQuerie : IRequest<PaginatedList<TenantDto>>
+public record GetTenantsQuerie : IRequest<PaginatedList<TenantDto>>
 {
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
 
-public class GetTenantMethodsQuerieHandler : IRequestHandler<GetTenantMethodsQuerie, PaginatedList<TenantDto>>
+public class GetTenantMethodsQuerieHandler : IRequestHandler<GetTenantsQuerie, PaginatedList<TenantDto>>
 {
    
     private readonly IAppDbContext _context;
@@ -27,7 +27,7 @@ public class GetTenantMethodsQuerieHandler : IRequestHandler<GetTenantMethodsQue
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<TenantDto>> Handle(GetTenantMethodsQuerie request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<TenantDto>> Handle(GetTenantsQuerie request, CancellationToken cancellationToken)
     {
         try
         {

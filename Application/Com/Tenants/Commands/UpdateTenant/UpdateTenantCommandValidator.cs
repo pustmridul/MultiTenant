@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Commands.UpdateTenantMethod
 {
-    internal class UpdateTenantMethodCommandValidator : AbstractValidator<UpdateTenantMethodCommand>
+    internal class UpdateTenantCommandValidator : AbstractValidator<UpdateTenantCommand>
     {
-        public UpdateTenantMethodCommandValidator()
+        public UpdateTenantCommandValidator()
         {
             RuleFor(v => v.TenantName)
                 .MaximumLength(200)

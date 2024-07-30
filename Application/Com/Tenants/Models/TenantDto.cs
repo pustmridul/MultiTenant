@@ -23,7 +23,7 @@ public class TenantDto
         public TenantMapping()
         {
             CreateMap<Tenant, TenantDto>();
-            CreateMap<UpdateTenantMethodCommand, Tenant>();
+            CreateMap<UpdateTenantCommand, Tenant>();
         }
     }
 }

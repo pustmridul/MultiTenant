@@ -30,6 +30,10 @@ public static class DependencyInjection
 
         services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 
+        services.AddScoped<IPasswordHash,PasswordHash>();
+        services.AddScoped<ITokenService,TokenService>();
+
+
         services
            .AddIdentityCore<User>()
            .AddRoles<IdentityRole>()

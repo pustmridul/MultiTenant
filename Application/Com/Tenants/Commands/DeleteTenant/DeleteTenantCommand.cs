@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Commands.DeleteTenantMethod;
 
-public record DeleteTenantMethodCommand(int tenantId): IRequest;
+public record DeleteTenantCommand(int tenantId): IRequest;
 
-internal class DeleteTenentMethodCommandHandler : IRequestHandler<DeleteTenantMethodCommand>
+internal class DeleteTenentMethodCommandHandler : IRequestHandler<DeleteTenantCommand>
 {
     private readonly IAppDbContext _context;
 
@@ -18,7 +18,7 @@ internal class DeleteTenentMethodCommandHandler : IRequestHandler<DeleteTenantMe
         _context = context;
     }
 
-    public async Task Handle(DeleteTenantMethodCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteTenantCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Tenants
             .FindAsync(new object[] { request.tenantId }, cancellationToken);

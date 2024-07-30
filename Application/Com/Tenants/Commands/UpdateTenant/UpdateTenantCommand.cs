@@ -8,7 +8,7 @@ using Application.Com.PaymentMethods.Models;
 
 namespace Application.Com.TenantMethods.Commands.UpdateTenantMethod
 {
-    public record UpdateTenantMethodCommand : IRequest
+    public record UpdateTenantCommand : IRequest
     {
         public int Id { get; init; }
         public string TenantName { get; init; } = string.Empty;
@@ -19,7 +19,7 @@ namespace Application.Com.TenantMethods.Commands.UpdateTenantMethod
         public string BillingAddress { get; init; } = string.Empty;
         public string ContactPerson { get; init; } = string.Empty;
     }
-    internal class UpdateTenantMethodCommandHandler : IRequestHandler<UpdateTenantMethodCommand>
+    internal class UpdateTenantMethodCommandHandler : IRequestHandler<UpdateTenantCommand>
     {
         private readonly IAppDbContext _context;
 
@@ -31,7 +31,7 @@ namespace Application.Com.TenantMethods.Commands.UpdateTenantMethod
             _mapper = mapper;
         }
 
-        public async Task Handle(UpdateTenantMethodCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateTenantCommand request, CancellationToken cancellationToken)
         {
 
             var entity = await _context.Tenants

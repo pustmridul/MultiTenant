@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Commands.CreateTenantMethod;
 
-public record CreateTenantMethodCommand : IRequest<int>
+public record CreateTenantCommand : IRequest<int>
 {
     public string TenantName { get; init; } = string.Empty;
     public string Domain { get; init; } = string.Empty;
@@ -18,7 +18,7 @@ public record CreateTenantMethodCommand : IRequest<int>
     public string ContactPerson { get; init; } = string.Empty;
 }
 
-internal class CreateTenantCommandHandler : IRequestHandler<CreateTenantMethodCommand, int>
+internal class CreateTenantCommandHandler : IRequestHandler<CreateTenantCommand, int>
 {
     private readonly IAppDbContext _context;
 
@@ -27,7 +27,7 @@ internal class CreateTenantCommandHandler : IRequestHandler<CreateTenantMethodCo
         _context = context;
     }
 
-    public async Task<int> Handle(CreateTenantMethodCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateTenantCommand request, CancellationToken cancellationToken)
     {
         var entity = new Tenant
         {

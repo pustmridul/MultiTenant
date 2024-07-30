@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Commands.CreateTenantMethod;
 
-internal class CreateTenantMethodCommandValidator :AbstractValidator<CreateTenantMethodCommand>
+internal class CreateTenantCommandValidator :AbstractValidator<CreateTenantCommand>
 {
    
-        public CreateTenantMethodCommandValidator()
+        public CreateTenantCommandValidator()
         {
         RuleFor(v => v.TenantName)
             .MaximumLength(200)

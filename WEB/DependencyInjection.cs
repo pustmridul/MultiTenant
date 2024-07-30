@@ -12,7 +12,7 @@ public static class DependencyInjection
     {
 
         services.AddScoped<IUser, CurrentUser>();
-        services.AddScoped<ITokenService, TokenService>();
+
         services.AddHttpContextAccessor();
 
         services.AddHealthChecks()

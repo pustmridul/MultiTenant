@@ -23,18 +23,18 @@ namespace WEB.Controllers
         
         }
         [HttpPost]
-        public async Task<PaginatedList<TenantDto>> GetAll( GetTenantMethodsQuerie query)
+        public async Task<PaginatedList<TenantDto>> GetAll( GetTenantsQuerie query)
         {
             return await Mediator.Send(query);
         }
        
         [HttpPost]
-        public async Task<int> Create(CreateTenantMethodCommand command)
+        public async Task<int> Create(CreateTenantCommand command)
         {
             return await Mediator.Send(command);
         }
         [HttpPut]
-        public async Task<IResult> Update(UpdateTenantMethodCommand command)
+        public async Task<IResult> Update(UpdateTenantCommand command)
         {
             if (command.Id == 0) return Results.BadRequest();
 
@@ -45,7 +45,7 @@ namespace WEB.Controllers
         [HttpDelete]
         public async Task<IResult> Delete(int id)
         {
-            await Mediator.Send(new DeleteTenantMethodCommand(id));
+            await Mediator.Send(new DeleteTenantCommand(id));
             return Results.NoContent();
         }
     }

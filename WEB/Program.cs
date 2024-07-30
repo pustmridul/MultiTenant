@@ -1,6 +1,7 @@
 using Infrastructure;
 using WEB;
 using Application.DependencyResolver;
+using WEB.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 

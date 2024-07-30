@@ -7,8 +7,9 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text;
 using Domain.Entity;
+using Application.Common.Interfaces;
 
-namespace WEB.Services;
+namespace Infrastructure.Services;
 
 
 public class TokenService : ITokenService
