@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.UsageLogs.Commands.CreateUsageLog
+namespace Application.Com.UserLogs.Commands.DeleteUsageLog
 {
-    internal class CreateUsageLogCommandsValidator
+    internal class DeleteUserLogCommands
     {
     }
 }

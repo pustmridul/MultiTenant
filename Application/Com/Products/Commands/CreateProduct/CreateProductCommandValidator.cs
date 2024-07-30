@@ -3,41 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entity;
+
 namespace Application.Com.Products.Commands.CreateProduct;
 
-public record CreateProductCommand : IRequest<int>
+internal class CreateProductsCommandValidator: AbstractValidator<CreateProductCommand>
 {
-    public string ProductName { get; init; } = string.Empty;
-    public string? Description { get; init; }
-    public string? PricingModel { get; init; }
-    public bool IsActive { get; init; }
-    public DateTime? ReleaseDate { get; init; }
-    public DateTime? EndofLifeDate { get; init; }
-}
-internal class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
-{
-    private readonly IAppDbContext _context;
-
-    public CreateProductCommandHandler(IAppDbContext context)
+    public CreateProductsCommandValidator()
     {
-        _context = context;
-    }
+        RuleFor(command => command.ProductName)
+            .NotEmpty().WithMessage("Product name is required.");
 
-    public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
-    {
-        var entity = new Product
-        {
-            ProductName = request.ProductName,
-            Description = request.Description,
-            PricingModel = request.PricingModel,
-            IsActive = request.IsActive,
-            ReleaseDate = request.ReleaseDate,
-            EndofLifeDate = request.EndofLifeDate
-        };
+        RuleFor(command => command.Description)
+            .MaximumLength(500).WithMessage("Description should not exceed 500 characters.");
 
-        _context.Products.Add(entity);
-        await _context.SaveChangesAsync(cancellationToken);
-        return entity.Id;
+        RuleFor(command => command.PricingModel)
+            .MaximumLength(50).WithMessage("Pricing model should not exceed 50 characters.");
+
+        RuleFor(command => command.IsActive)
+            .NotNull().WithMessage("IsActive field must not be null.");
+
+        RuleFor(command => command.ReleaseDate)
+            .GreaterThan(DateTime.Now).WithMessage("Release date must be in the future.");
+
+        RuleFor(command => command.EndofLifeDate)
+            .GreaterThan(command => command.ReleaseDate).WithMessage("End of life date must be after the release date.");
     }
 }

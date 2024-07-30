@@ -26,18 +26,24 @@ namespace Application.Com.Invoices.Commands.CreateInvoice
 
         public async Task<int> Handle(CreateInvoiceCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Invoice
-            {
-                SubscriptionId = request.SubscriptionId,
-                DueDate = request.DueDate,
-                AmountDue = request.AmountDue,
-                IssuedDate = request.IssuedDate,
-                InvoiceStatusId = request.InvoiceStatusId
-            };
+            try {
+                var entity = new Invoice
+                {
+                    SubscriptionId = request.SubscriptionId,
+                    DueDate = request.DueDate,
+                    AmountDue = request.AmountDue,
+                    IssuedDate = request.IssuedDate,
+                    InvoiceStatusId = request.InvoiceStatusId
+                };
 
-            _context.Invoices.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
-            return entity.Id;
+                _context.Invoices.Add(entity);
+                await _context.SaveChangesAsync(cancellationToken);
+                return entity.Id;
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+          
         }
     }
 }

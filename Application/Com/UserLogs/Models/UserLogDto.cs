@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.UsageLogs.Commands.DeleteUsageLog
+namespace Application.Com.UserLogs.Models
 {
-    internal class DeleteUsageLogCommands
+    internal class UserLogDto
     {
     }
 }

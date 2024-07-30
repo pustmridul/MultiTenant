@@ -19,16 +19,16 @@ public record CreateUserCommand : IRequest<string> // IdentityUser typically use
 }
 internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, string>
 {
-    private readonly UserManager<User> _userManager;
+    private readonly IAppDbContext _context;
 
-    public CreateUserCommandHandler(UserManager<User> userManager)
+    public CreateUserCommandHandler( IAppDbContext context)
     {
-        _userManager = userManager;
+        _context = context;
     }
 
     public async Task<string> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User
+        var entity = new User
         {
             UserName = request.Username, // IdentityUser expects UserName
             Email = request.Email,
@@ -38,13 +38,10 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, str
             ProfilePictureURL = request.ProfilePictureURL
         };
 
-        var result = await _userManager.CreateAsync(user, request.Password);
+         _context.Users.Add(entity);
 
-        if (result.Succeeded)
-        {
-            return user.Id;
-        }
+        await _context.SaveChangesAsync(cancellationToken);
 
-        throw new Exception("User creation failed: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+        return entity.Id;
     }
 }

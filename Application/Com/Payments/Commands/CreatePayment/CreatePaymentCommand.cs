@@ -27,18 +27,22 @@ internal class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentComman
 
     public async Task<int> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Payment
+        try
         {
-            SubscriptionId = request.SubscriptionId,
-            Amount = request.Amount,
-            PaymentDate = request.PaymentDate,
-            PaymentMethodId = request.PaymentMethodId,
-            PaymentStatusId = request.PaymentStatusId,
-            InvoiceId = request.InvoiceId
-        };
+            var entity = new Payment
+            {
+                SubscriptionId = request.SubscriptionId,
+                Amount = request.Amount,
+                PaymentDate = request.PaymentDate,
+                PaymentMethodId = request.PaymentMethodId,
+                PaymentStatusId = request.PaymentStatusId,
+                InvoiceId = request.InvoiceId
+            };
 
-        _context.Payments.Add(entity);
-        await _context.SaveChangesAsync(cancellationToken);
-        return entity.Id;
+            _context.Payments.Add(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+            return entity.Id;
+        }
+        catch (Exception ex) { throw new Exception(ex.Message); }
     }
 }
