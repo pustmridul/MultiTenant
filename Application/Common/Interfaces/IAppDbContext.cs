@@ -11,6 +11,10 @@ namespace Application.Common.Interfaces
         DbSet<Product> Products { get; }
         DbSet<Subscription> Subscriptions { get; }
         DbSet<UserLog> UserLogs { get; }
+        DbSet<Feature> Features { get; }
+        DbSet<Plan> Plans { get; }
+        DbSet<PlanFeature> PlanFeatures { get; }
+        DbSet<Pricing> Pricings { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
       

@@ -15,7 +15,11 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
     public DbSet<UserLog> UserLogs => Set<UserLog>();
-    
+    public DbSet<Feature> Features => Set<Feature>();
+    public DbSet<Plan> Plans => Set<Plan>();
+    public DbSet<PlanFeature> PlanFeatures => Set<PlanFeature>();
+    public DbSet<Pricing> Pricings => Set<Pricing>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Users.Commands.CreateUser;
 
-public record CreateUserCommand : IRequest<int> // IdentityUser typically uses string as the ID type
+public record CreateUserCommand : IRequest<int> 
 {
     public string Username { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
-    public string Password { get; init; } = string.Empty; // You might handle password securely
+    public string Password { get; init; } = string.Empty; 
     public int TenantId { get; init; }
     public DateTime LastLogin { get; init; }
     public bool IsActive { get; init; }
@@ -31,32 +31,43 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int
 
     public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        // var pas= _passwordHash.CreateHash()
-       
-        var newPassword = new Random(DateTime.UtcNow.Millisecond).Next(1000, 9999);
+        try {
+            var newPassword = new Random(DateTime.UtcNow.Millisecond).Next(1000, 9999);
 
-        string newPasswordHash = string.Empty;
-        string newPasswordSaltHash = string.Empty;
+            string newPasswordHash = string.Empty;
+            string newPasswordSaltHash = string.Empty;
 
-        _passwordHash.CreateHash(newPassword.ToString(CultureInfo.InvariantCulture), ref newPasswordHash,
-            ref newPasswordSaltHash);
+            _passwordHash.CreateHash(newPassword.ToString(CultureInfo.InvariantCulture), ref newPasswordHash,
+                ref newPasswordSaltHash);
 
-        var entity = new User
-        {
-            Username = request.Username, // IdentityUser expects UserName
-            Email = request.Email,
-            TenantId = request.TenantId,
-            LastLogin = request.LastLogin,
-            IsActive = request.IsActive,
-            ProfilePictureURL = request.ProfilePictureURL,
-            PasswordHash = newPasswordHash,
-            PasswordSalt = newPasswordSaltHash,
-        };
+            var entity = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                Password = request.Password,
+                TenantId = request.TenantId,
+                LastLogin = request.LastLogin,
+                IsActive = request.IsActive,
+                ProfilePictureURL = request.ProfilePictureURL,
+                PasswordHash = request.Password,
+                PasswordSalt = newPasswordSaltHash,
+            };
 
-         _context.Users.Add(entity);
+            if (request.Password.Length == 0)
+            {
+                entity.Password = newPasswordHash;
+                entity.PasswordSalt = newPasswordSaltHash;
 
-        await _context.SaveChangesAsync(cancellationToken);
+            }
 
-        return entity.Id;
+            _context.Users.Add(entity);
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return entity.Id;
+
+        }
+
+        catch (Exception ex) { throw new Exception(ex.Message); }
     }
 }

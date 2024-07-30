@@ -19,8 +19,8 @@ namespace Application.Com.Users.Commands.CreateUser
                 .EmailAddress().WithMessage("Invalid email format.");
 
             RuleFor(command => command.Password)
-                .NotEmpty().WithMessage("Password is required.")
-                .MinimumLength(6).WithMessage("Password should be at least 6 characters long.");
+                .Cascade(CascadeMode.Stop) // Stop validation if the password is empty
+                .Must(BeValidPassword).WithMessage("Password should be at least 6 characters long.");
 
             RuleFor(command => command.TenantId)
                 .GreaterThan(0).WithMessage("Tenant ID must be greater than 0.");
@@ -34,6 +34,17 @@ namespace Application.Com.Users.Commands.CreateUser
             RuleFor(command => command.ProfilePictureURL)
                 .Must(BeAValidUrl).WithMessage("Invalid URL format for profile picture.");
         }
+
+        private bool BeValidPassword(string? password)
+        {
+            // If password is null or empty, it's valid
+            if (string.IsNullOrEmpty(password))
+                return true;
+
+            // Validate length and other password rules
+            return password.Length >= 6;
+        }
+
         private bool BeAValidUrl(string? url)
         {
             if (string.IsNullOrEmpty(url))

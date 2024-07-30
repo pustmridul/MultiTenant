@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.Invoices.Commands.DeleteInvoice
-{
-    internal class DeleteInvoiceCommand
-    {
-    }
-}
+namespace Application.Com.Invoices.Commands.DeleteInvoice;
+
+public record DeleteInvoiceCommand(int Id) : IRequest;
+
