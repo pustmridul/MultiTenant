@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Features.Queries.GetFeature;
 
-public record GetFeatureQuerie : IRequest<PaginatedList<FeaturesDto>>
+public record GetFeatureQuery : IRequest<PaginatedList<FeaturesDto>>
 {
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
-public class GetFeatureQuerieHandler : IRequestHandler<GetFeatureQuerie, PaginatedList<FeaturesDto>>
+public class GetFeatureQuerieHandler : IRequestHandler<GetFeatureQuery, PaginatedList<FeaturesDto>>
 {
     private readonly IAppDbContext _context;
     private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ public class GetFeatureQuerieHandler : IRequestHandler<GetFeatureQuerie, Paginat
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<FeaturesDto>> Handle(GetFeatureQuerie request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<FeaturesDto>> Handle(GetFeatureQuery request, CancellationToken cancellationToken)
     {
         try
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Plans.Models
 {
-    internal class PlanDto
+    public class PlanDto
     {
         public string Name { get; init; } = string.Empty;
         public string? Description { get; init; }
