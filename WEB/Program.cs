@@ -4,6 +4,11 @@ using Application.DependencyResolver;
 using WEB.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    });
 
 builder.Services.AddHttpContextAccessor();
 
@@ -29,9 +34,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+app.UseRouting();
+
+app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials());
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

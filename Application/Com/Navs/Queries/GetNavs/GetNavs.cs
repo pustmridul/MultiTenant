@@ -53,6 +53,7 @@ public class GetNavsQueryHandler : IRequestHandler<GetNavsQuery, List<NavDto>>
             {
                 Id = n.Id,
                 Name = n.Name,
+                UrlLink = n.UrlLink,
                 ParentId = n.ParentId,
                 Children = BuildTree(navItems, n.Id)
             })

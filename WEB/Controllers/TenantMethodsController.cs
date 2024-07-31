@@ -1,9 +1,4 @@
-﻿using Application.Com.PaymentMethods.Commands.CreatePaymentMethod;
-using Application.Com.PaymentMethods.Commands.DeletePaymentMethod;
-using Application.Com.PaymentMethods.Commands.UpdatePaymentMethod;
-using Application.Com.PaymentMethods.Models;
-using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
-using Application.Com.TenantMethods.Commands.CreateTenantMethod;
+﻿using Application.Com.TenantMethods.Commands.CreateTenantMethod;
 using Application.Com.TenantMethods.Commands.DeleteTenantMethod;
 using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
 using Application.Com.TenantMethods.Models;

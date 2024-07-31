@@ -9,6 +9,7 @@ namespace Domain.Entity;
 public class Nav : BaseEntity
 {
     public string Name { get; set; }= string.Empty;
+    public string? UrlLink { get; set; }
     public int? ParentId { get; set; }
     public ICollection<Nav>? Children { get; set; }
 }

@@ -10,6 +10,7 @@ public record UpdateNavCommand : IRequest
 {
     public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
+    public string? UrlLink { get; set; }
 }
 
 internal class UpdateNavCommandHandler : IRequestHandler<UpdateNavCommand>
@@ -30,6 +31,7 @@ internal class UpdateNavCommandHandler : IRequestHandler<UpdateNavCommand>
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Name = request.Name;
+        entity.UrlLink= request.UrlLink;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

@@ -13,6 +13,7 @@ namespace Application.Com.Navs.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }= string.Empty;
+        public string? UrlLink { get; set; }
         public int? ParentId { get; set; }
         public ICollection<NavDto>? Children { get; set; }
     }

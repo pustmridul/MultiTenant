@@ -10,6 +10,7 @@ namespace Application.Com.Navs.Commands.CreateNav;
 public record CreateNavCommand : IRequest<int>
 {
     public string Name { get; set; } = string.Empty;
+    public string? UrlLink { get; set; }
     public int? ParentId { get; set; }
 }
 
@@ -28,6 +29,7 @@ internal class CreateNavCommandHandler : IRequestHandler<CreateNavCommand, int>
         {
             Name = request.Name,
             ParentId = request.ParentId,
+            UrlLink = request.UrlLink,
         };
 
         _context.Navs.Add(entity);
