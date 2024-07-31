@@ -23,8 +23,8 @@ namespace WEB.Controllers
         { 
         }
         
-        [HttpPost]
-        public async Task<PaginatedList<PlanDto>> GetAll([AsParameters] GetPlanQuery query)
+        [HttpGet]
+        public async Task<PaginatedList<PlanDto>> GetAll([FromQuery] GetPlanQuery query)
         {
             return await Mediator.Send(query);
         }
