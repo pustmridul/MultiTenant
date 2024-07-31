@@ -11,7 +11,7 @@ internal class LoginCommandValidator : AbstractValidator<LoginCommand>
 {
     public LoginCommandValidator()
     {
-        RuleFor(v => v.Username)
+        RuleFor(v => v.Email)
             .MaximumLength(200)
             .NotEmpty();
         RuleFor(v => v.Password)

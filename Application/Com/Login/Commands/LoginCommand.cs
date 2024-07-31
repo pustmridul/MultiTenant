@@ -6,7 +6,7 @@ namespace Application.Com.Login.Commands;
 
 public class LoginCommand : IRequest<LoginResponse>
 {
-    public string Username { get; set; }= string.Empty;
+    public string Email { get; set; }= string.Empty;
     public string Password { get; set; } = string.Empty;
 }
 internal class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
@@ -29,8 +29,8 @@ internal class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse
             var result = new LoginResponse();
 
             var obj = await _context.Users
-                .Include(i=>i.UserRoles).ThenInclude(i=>i.Role)
-                .SingleOrDefaultAsync(q => q.Username == request.Username, cancellationToken);
+                //.Include(i=>i.UserRoles).ThenInclude(i=>i.Role)
+                .SingleOrDefaultAsync(q => q.Email == request.Email, cancellationToken);
             if (obj == null) 
             {
                 throw new LoginFailedException();
