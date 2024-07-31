@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Com\Invoices\Models\" />
     <Folder Include="Com\Login\Queries\" />
     <Folder Include="Com\Products\Commands\DeleteProduct\" />
     <Folder Include="Com\Products\Commands\UpdateProduct\" />

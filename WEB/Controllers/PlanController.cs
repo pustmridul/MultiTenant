@@ -19,6 +19,10 @@ namespace WEB.Controllers
     public class PlanController : ApiControllerBase
     {
 
+        public PlanController()
+        { 
+        }
+        
         [HttpPost]
         public async Task<PaginatedList<PlanDto>> GetAll([AsParameters] GetPlanQuery query)
         {
@@ -30,7 +34,6 @@ namespace WEB.Controllers
         {
             return await Mediator.Send(query);
         }
-        [HttpPut]
         public async Task<IResult> Update(UpdatePlanCommand command)
         {
             if (command.Id == 0) return Results.BadRequest();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Subscription.Models
 {
-    internal class SubscriptionDto
+    public class SubscriptionDto
     {
     }
 }
