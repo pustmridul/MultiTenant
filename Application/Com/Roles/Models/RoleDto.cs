@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Roles.Models
 {
-    internal class RoleDto
+    public class RoleDto
     {
         public int Id { get; init; }
         public string Name { get; init; } = string.Empty;

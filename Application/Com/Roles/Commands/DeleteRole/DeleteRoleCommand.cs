@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Roles.Commands.DeleteRole;
 
-public record DeleteRoleCommand : IRequest
+public record DeleteRoleCommand(int RoleId) : IRequest
 {
-    public int RoleId { get; init; }
+   
 }
 public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand>
 {

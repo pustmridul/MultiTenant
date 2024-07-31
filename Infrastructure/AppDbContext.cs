@@ -21,6 +21,8 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Pricing> Pricings => Set<Pricing>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
+    public DbSet<Nav> Navs => Set<Nav>();
+
 
 
     protected override void OnModelCreating(ModelBuilder builder)
