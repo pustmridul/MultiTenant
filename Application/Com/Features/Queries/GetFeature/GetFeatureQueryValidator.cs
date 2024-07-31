@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Features.Queries.GetFeature;
 
-internal class GetFeatureQuerieValidator:AbstractValidator<GetFeatureQuerie>
+internal class GetFeatureQueryValidator:AbstractValidator<GetFeatureQuery>
 {
-    public GetFeatureQuerieValidator()
+    public GetFeatureQueryValidator()
     {
         RuleFor(x => x.PageNumber)
             .GreaterThan(0).WithMessage("Page number must be greater than zero.");

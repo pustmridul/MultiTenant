@@ -23,7 +23,7 @@ namespace WEB.Controllers
         
         }
         [HttpPost]
-        public async Task<PaginatedList<TenantDto>> GetAll( GetTenantsQuerie query)
+        public async Task<PaginatedList<TenantDto>> GetAll( GetTenantsQuery query)
         {
             return await Mediator.Send(query);
         }

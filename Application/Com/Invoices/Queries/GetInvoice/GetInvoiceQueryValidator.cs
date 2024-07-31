@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.Users.Queries.GetUser
+namespace Application.Com.Invoices.Queries.GetInvoice
 {
-    internal class GetUserQuerieValidator
+    internal class GetInvoiceQueryValidator
     {
     }
 }

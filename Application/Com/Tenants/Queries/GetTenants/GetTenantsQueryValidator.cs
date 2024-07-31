@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Com.TenantMethods.Queries.GetTenantMethods;
 
-public class GetTenantsQuerieValidator : AbstractValidator<GetTenantsQuerie>
+public class GetTenantsQueryValidator : AbstractValidator<GetTenantsQuery>
 {
-    public GetTenantsQuerieValidator()
+    public GetTenantsQueryValidator()
     {
         RuleFor(x => x.PageNumber)
             .GreaterThanOrEqualTo(1).WithMessage("PageNumber at least greater than or equal to 1.");

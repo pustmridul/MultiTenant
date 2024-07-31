@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.Products.Queries.GetProduct
+namespace Application.Com.Users.Queries.GetUser
 {
-    internal class GetPaymentQuerieValidator
+    internal class GetUserQueryValidator
     {
     }
 }

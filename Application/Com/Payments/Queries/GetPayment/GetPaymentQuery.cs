@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Payments.Queries.GetPayment
 {
-    internal class GetPaymentQuerie
+    internal class GetPaymentQuery
     {
     }
 }
