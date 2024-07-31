@@ -11,11 +11,11 @@ public record CreatePaymentMethodCommand : IRequest<int>
     public string Name { get; init; } = string.Empty;
 }
 
-internal class CreateBillerCommandHandler : IRequestHandler<CreatePaymentMethodCommand, int>
+internal class CreatePaymentMethodCommandHandler : IRequestHandler<CreatePaymentMethodCommand, int>
 {
     private readonly IAppDbContext _context;
 
-    public CreateBillerCommandHandler(IAppDbContext context)
+    public CreatePaymentMethodCommandHandler(IAppDbContext context)
     {
         _context = context;
     }

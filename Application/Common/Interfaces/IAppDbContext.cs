@@ -17,6 +17,8 @@ namespace Application.Common.Interfaces
         DbSet<Pricing> Pricings { get; }
         DbSet<Role> Roles { get; }
         DbSet<UserRole> UserRoles { get; }
+        DbSet<Nav> Navs { get; }
+
 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

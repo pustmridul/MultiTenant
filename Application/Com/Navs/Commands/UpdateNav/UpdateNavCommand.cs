@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Com.PaymentMethods.Commands.UpdatePaymentMethod;
+namespace Application.Com.Navs.Commands.UpdateNav;
 
-public record UpdatePaymentMethodCommand : IRequest
+public record UpdateNavCommand : IRequest
 {
     public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
 }
 
-internal class UpdatePaymentMethodCommandHandler : IRequestHandler<UpdatePaymentMethodCommand>
+internal class UpdateNavCommandHandler : IRequestHandler<UpdateNavCommand>
 {
     private readonly IAppDbContext _context;
 
-    public UpdatePaymentMethodCommandHandler(IAppDbContext context)
+    public UpdateNavCommandHandler(IAppDbContext context)
     {
         _context = context;
     }
 
-    public async Task Handle(UpdatePaymentMethodCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateNavCommand request, CancellationToken cancellationToken)
     {
  
-        var entity = await _context.PaymentMethods
+        var entity = await _context.Navs
               .FindAsync(new object[] { request.Id }, cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
