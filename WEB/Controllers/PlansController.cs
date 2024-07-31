@@ -16,10 +16,10 @@ namespace WEB.Controllers
 {
     
     [ApiController]
-    public class PlanController : ApiControllerBase
+    public class PlansController : ApiControllerBase
     {
 
-        public PlanController()
+        public PlansController()
         { 
         }
         
@@ -34,6 +34,7 @@ namespace WEB.Controllers
         {
             return await Mediator.Send(query);
         }
+        [HttpPost]
         public async Task<IResult> Update(UpdatePlanCommand command)
         {
             if (command.Id == 0) return Results.BadRequest();
