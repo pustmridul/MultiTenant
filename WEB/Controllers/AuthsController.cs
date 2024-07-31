@@ -23,7 +23,6 @@ namespace WEB.Controllers
             var result = await Mediator.Send(model);
 
             return Ok(result);
-
         }
     }
 }

@@ -18,6 +18,7 @@ namespace WEB.Controllers
         {
             return await Mediator.Send(query);
         }
+        [HttpPut]
         public async Task<IResult> Update(UpdatePlanCommand command)
         {
             if (command.Id == 0) return Results.BadRequest();
