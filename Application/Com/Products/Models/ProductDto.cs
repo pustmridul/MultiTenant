@@ -9,7 +9,7 @@ namespace Application.Com.Products.Models
     public class ProductDto
     {   
         public int Id { get; set; }
-        public string ProductName { get; init; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
         public string? Description { get; init; }
         public string? PricingModel { get; init; }
         public bool IsActive { get; init; }

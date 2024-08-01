@@ -20,8 +20,8 @@ namespace WEB.Controllers
     {
 
        public RolesController() { }
-        [HttpPost]
-        public async Task<PaginatedList<RoleDto>> GetAll(GetRoleQuery query)
+        [HttpGet]
+        public async Task<PaginatedList<RoleDto>> GetAll([FromQuery] GetRoleQuery query)
         {
             return await Mediator.Send(query);
         }

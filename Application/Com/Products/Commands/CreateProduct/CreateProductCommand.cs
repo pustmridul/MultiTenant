@@ -8,7 +8,7 @@ namespace Application.Com.Products.Commands.CreateProduct;
 
 public record CreateProductCommand : IRequest<int>
 {
-    public string ProductName { get; init; } = string.Empty;
+    public string Name { get; init; } = string.Empty;
     public string? Description { get; init; }
     public string? PricingModel { get; init; }
     public bool IsActive { get; init; }
@@ -30,7 +30,7 @@ internal class CreateProductCommandHandler : IRequestHandler<CreateProductComman
         {
             var entity = new Product
             {
-                ProductName = request.ProductName,
+                Name = request.Name,
                 Description = request.Description,
                 PricingModel = request.PricingModel,
                 IsActive = request.IsActive,

@@ -16,14 +16,14 @@ namespace WEB.Controllers
 {
    
     [ApiController]
-    public class FeatureController : ApiControllerBase
+    public class FeaturesController : ApiControllerBase
     {
-        public FeatureController()
+        public FeaturesController()
         {
         }
 
-        [HttpPost]
-        public async Task<PaginatedList<FeaturesDto>> GetAll([AsParameters] GetFeatureQuery query)
+        [HttpGet]
+        public async Task<PaginatedList<FeaturesDto>> GetAll([FromQuery] GetFeatureQuery query)
         {
             return await Mediator.Send(query);
         }
