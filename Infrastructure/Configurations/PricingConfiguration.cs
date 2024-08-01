@@ -14,5 +14,10 @@ internal class PricingConfiguration:IEntityTypeConfiguration<Pricing>
         builder.ToTable("Pricing");
         builder.HasKey(e => new { e.Id });
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
+
+        builder.HasOne(e => e.Plan)
+             .WithMany(e => e.Pricings)
+             .HasForeignKey(e => e.PlanId)
+             .OnDelete(DeleteBehavior.NoAction);
     }
 }
