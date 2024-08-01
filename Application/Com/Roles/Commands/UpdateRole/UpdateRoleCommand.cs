@@ -1,4 +1,5 @@
-﻿using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
+﻿using Application.Com.Permissions.Models;
+using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Application.Com.Roles.Commands.UpdateRole;
 
-public record UpdateRoleCommand : IRequest
+public record UpdateRoleCommand : IRequest<Result>
 {
     public int Id { get; init; }
     public string Name { get; init; } = string.Empty;
+    public List<PermissionDto> Permissions { get; init; } = new List<PermissionDto>();
 }
-internal class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand>
+internal class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand , Result>
 {
     private readonly IAppDbContext _context;
 
@@ -24,17 +26,50 @@ internal class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand>
         _mapper = mapper;
     }
 
-    public async Task Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
     {
+        using (var transaction = await _context.BeginTransactionAsync(cancellationToken))
+        {
+            try
+            {
+                var role = await _context.Roles
+                    .Include(i => i.RolePermissions)
+                    .SingleOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
 
-        var entity = await _context.Tenants
-              .FindAsync(new object[] { request.Id }, cancellationToken);
-
-        Guard.Against.NotFound(request.Id, entity);
-
-        _mapper.Map(request, entity);
+                Guard.Against.NotFound(request.Id, role);
 
 
-        await _context.SaveChangesAsync(cancellationToken);
+                foreach (var d in request.Permissions)
+                {
+                    var rolePermission = role.RolePermissions.SingleOrDefault(q=>q.PermissionId== d.Id);
+                    if (rolePermission == null) {
+                        rolePermission = new RolePermission
+                        {
+                            RoleId = role.Id,
+                            PermissionId = d.Id
+                        };
+                        _context.RolePermissions.Add(rolePermission);
+                    }
+                   
+                }
+                List<RolePermission> toBeDeleted= new List<RolePermission>();
+
+                foreach (var permission in role.RolePermissions) 
+                { 
+
+                }
+
+                await _context.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }

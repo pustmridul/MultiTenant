@@ -1,5 +1,9 @@
-﻿using Application.Com.Login.Commands;
+﻿using Application.Com.Features.Models;
+using Application.Com.Features.Queries.GetFeature;
+using Application.Com.Login.Commands;
+using Application.Com.Permissions.Queries.GetPermissions;
 using Application.Com.Users.Commands.CreateUser;
+using Application.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
@@ -19,6 +23,11 @@ namespace WEB.Controllers
             var result = await Mediator.Send(model);
 
             return Ok(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllPermission()
+        {
+            return Ok( await Mediator.Send( new GetPermissionQuery()));
         }
     }
 }
