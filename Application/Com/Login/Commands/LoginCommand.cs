@@ -29,7 +29,7 @@ internal class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse
             var result = new LoginResponse();
 
             var obj = await _context.Users
-               // .Include(i=>i.UserRoles).ThenInclude(i=>i.Role)
+
                 .SingleOrDefaultAsync(q => q.Email == request.Email, cancellationToken);
             if (obj == null) 
             {

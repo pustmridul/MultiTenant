@@ -1,9 +1,5 @@
 ﻿using Application.Com.Login.Commands;
-using Application.Com.PaymentMethods.Models;
-using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
 using Application.Com.Users.Commands.CreateUser;
-using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
@@ -14,7 +10,7 @@ namespace WEB.Controllers
         [HttpPost]
         public async Task<IResult> CreateUser(CreateUserCommand query)
         {
-            
+
             return Results.Ok(await Mediator.Send(query));
         }
         [HttpPost]
