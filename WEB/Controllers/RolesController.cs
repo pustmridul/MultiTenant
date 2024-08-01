@@ -15,7 +15,9 @@ namespace WEB.Controllers
 
        public RolesController() { }
         [HttpGet]
-        public async Task<IList<RoleDto>> GetAll(GetRolesQuery query)
+
+        public async Task<IList<RoleDto>> GetAll([FromQuery] GetRolesQuery query)
+
         {
             return await Mediator.Send(query);
         }

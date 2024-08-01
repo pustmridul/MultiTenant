@@ -10,7 +10,7 @@ internal class CreateProductsCommandValidator: AbstractValidator<CreateProductCo
 {
     public CreateProductsCommandValidator()
     {
-        RuleFor(command => command.ProductName)
+        RuleFor(command => command.Name)
             .NotEmpty().WithMessage("Product name is required.");
 
         RuleFor(command => command.Description)

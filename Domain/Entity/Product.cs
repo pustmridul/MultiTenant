@@ -8,7 +8,7 @@ namespace Domain.Entity
 {
     public class Product : BaseEntity
     {
-        public string ProductName { get; set; }=string.Empty;
+        public string Name { get; set; }=string.Empty;
         public string? Description { get; set; }
         public string? PricingModel { get; set; }
         public bool IsActive { get; set; }
