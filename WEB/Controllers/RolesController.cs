@@ -1,11 +1,4 @@
-﻿using Application.Com.TenantMethods.Commands.CreateTenantMethod;
-using Application.Com.TenantMethods.Commands.DeleteTenantMethod;
-using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
-using Application.Com.TenantMethods.Models;
-using Application.Com.TenantMethods.Queries.GetTenantMethods;
-using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Application.Com.Roles.Models;
 using Application.Com.Roles.Queries.GetRole;
 using Application.Com.Roles.Commands.CreateRole;
@@ -19,17 +12,18 @@ namespace WEB.Controllers
     public class RolesController : ApiControllerBase
     {
 
+
        public RolesController() { }
-        [HttpPost]
-        public async Task<PaginatedList<RoleDto>> GetAll(GetRoleQuery query)
+        [HttpGet]
+        public async Task<IList<RoleDto>> GetAll(GetRolesQuery query)
         {
             return await Mediator.Send(query);
         }
 
         [HttpPost]
-        public async Task<int> Create(CreateRoleCommand command)
+        public async Task<IActionResult> Create(CreateRoleCommand command)
         {
-            return await Mediator.Send(command);
+            return Ok( await Mediator.Send(command));
         }
         [HttpPut]
         public async Task<IResult> Update(UpdateRoleCommand command)

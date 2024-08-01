@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entity;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace Infrastructure;
@@ -22,7 +23,18 @@ public class AppDbContext : DbContext, IAppDbContext
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
     public DbSet<Nav> Navs => Set<Nav>();
+    public DbSet<Permission> Permissions => Set<Permission>();
+    public DbSet<RolePermission> RolePermissions => Set<RolePermission>();
 
+    public IDbContextTransaction BeginTransaction()
+    {
+        return Database.BeginTransaction();
+    }
+
+    public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
+    {
+        return await Database.BeginTransactionAsync(cancellationToken);
+    }
 
 
     protected override void OnModelCreating(ModelBuilder builder)

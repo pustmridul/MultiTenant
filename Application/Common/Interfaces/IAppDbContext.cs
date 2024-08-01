@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Storage;
+
 namespace Application.Common.Interfaces
 {
     public interface IAppDbContext
@@ -18,10 +20,14 @@ namespace Application.Common.Interfaces
         DbSet<Role> Roles { get; }
         DbSet<UserRole> UserRoles { get; }
         DbSet<Nav> Navs { get; }
-
-
+        DbSet<Permission> Permissions { get; }
+        DbSet<RolePermission> RolePermissions { get; }
+        IDbContextTransaction BeginTransaction();
+        Task< IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+
       
     }
 }
