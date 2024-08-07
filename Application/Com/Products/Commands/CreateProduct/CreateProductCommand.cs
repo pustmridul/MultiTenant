@@ -35,7 +35,8 @@ internal class CreateProductCommandHandler : IRequestHandler<CreateProductComman
                 PricingModel = request.PricingModel,
                 IsActive = request.IsActive,
                 ReleaseDate = request.ReleaseDate,
-                EndofLifeDate = request.EndofLifeDate
+                EndofLifeDate = request.EndofLifeDate,
+                
             };
 
             _context.Products.Add(entity);
