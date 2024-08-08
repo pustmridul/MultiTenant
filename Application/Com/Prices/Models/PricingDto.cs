@@ -1,17 +1,10 @@
-﻿using Application.Com.Plans.Models;
-using Application.Com.Products.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Application.Com.Prices.Models;
 
 public class PricingDto
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public string Name { get; set; }=string.Empty;
+    public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; }
     private class PriceMapping : Profile
     {
