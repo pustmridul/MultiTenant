@@ -11,8 +11,6 @@ namespace WEB.Controllers
     [ApiController]
     public class RolesController : ApiControllerBase
     {
-
-
        public RolesController() { }
         [HttpGet]
 

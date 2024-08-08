@@ -28,7 +28,6 @@ public class UpdatePriceCommandHandler : IRequestHandler<UpdatePriceCommand, Res
     {
         try
         {
-          
             var entity= await _context.Pricings
                 .SingleOrDefaultAsync(q=>q.Id == request.Id, cancellationToken);
             if (entity == null)
