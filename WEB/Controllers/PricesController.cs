@@ -30,9 +30,9 @@ namespace WEB.Controllers
 
 
         [HttpPost]
-        public async Task<int> Create([AsParameters] CreatePriceCommand query)
+        public async Task<int> Create( CreatePriceCommand command)
         {
-            return await Mediator.Send(query);
+            return await Mediator.Send(command);
         }
         [HttpPut]
         public async Task<IResult> Update(UpdatePriceCommand command)

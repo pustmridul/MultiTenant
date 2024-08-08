@@ -31,6 +31,7 @@ public class GetPriceQueryHandler : IRequestHandler<GetPriceQuery, PaginatedList
                 .Include(p => p.Plan) 
                 .OrderBy(x => x.PlanId)
                 .ProjectTo<PricingDto>(_mapper.ConfigurationProvider)
+                .AsNoTracking()
                 .PaginatedListAsync(request.PageNumber, request.PageSize, cancellationToken);
 
             return await query;

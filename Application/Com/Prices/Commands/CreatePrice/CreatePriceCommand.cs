@@ -30,7 +30,6 @@ internal class CreatePriceCommandHandler : IRequestHandler<CreatePriceCommand, i
             {
                 PlanId = request.PlanId,
                 Price = request.Price,
-                Plan = plan
             };
 
             _context.Pricings.Add(pricing);
