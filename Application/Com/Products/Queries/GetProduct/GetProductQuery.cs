@@ -1,4 +1,5 @@
-﻿using Application.Com.Products.Models;
+﻿using Application.Com.PaymentMethods.Models;
+using Application.Com.Products.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,17 +26,19 @@ public class GetProductQueryHandler : IRequestHandler<GetProductQuery, Paginated
 
     public async Task<PaginatedList<ProductDto>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.Products
-            .AsNoTracking()
-            .ProjectTo<ProductDto>(_mapper.ConfigurationProvider);
+        try
+        {
+            return await _context.Products
+           .OrderBy(x => x.Name)
+           .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+           .PaginatedListAsync(request.PageNumber, request.PageSize, cancellationToken);
 
-        var totalItems = await query.CountAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
 
-        var items = await query
-            .Skip((request.PageNumber - 1) * request.PageSize)
-            .Take(request.PageSize)
-            .ToListAsync(cancellationToken);
 
-        return new PaginatedList<ProductDto>(items, totalItems, request.PageNumber, request.PageSize);
     }
 }
