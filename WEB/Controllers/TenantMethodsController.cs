@@ -4,25 +4,24 @@ using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
 using Application.Com.TenantMethods.Models;
 using Application.Com.TenantMethods.Queries.GetTenantMethods;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
 {
-   
+
     [ApiController]
     public class TenantMethodsController : ApiControllerBase
     {
         public TenantMethodsController()
-        { 
-        
+        {
+
         }
         [HttpPost]
-        public async Task<PaginatedList<TenantDto>> GetAll( GetTenantsQuery query)
+        public async Task<PaginatedList<TenantDto>> GetAll(GetTenantsQuery query)
         {
             return await Mediator.Send(query);
         }
-       
+
         [HttpPost]
         public async Task<int> Create(CreateTenantCommand command)
         {

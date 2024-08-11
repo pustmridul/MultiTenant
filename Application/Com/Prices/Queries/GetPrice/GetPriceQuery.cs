@@ -9,8 +9,8 @@ namespace Application.Com.Prices.Queries.GetPrice;
 
 public class GetPriceQuery : IRequest<PaginatedList<PricingDto>>
 {
-    public int PageNumber { get; init; } = 1;
-    public int PageSize { get; init; } = 10;
+    public int PageNumber { get; init; } 
+    public int PageSize { get; init; } 
 }
 public class GetPriceQueryHandler : IRequestHandler<GetPriceQuery, PaginatedList<PricingDto>>
 {
@@ -27,14 +27,14 @@ public class GetPriceQueryHandler : IRequestHandler<GetPriceQuery, PaginatedList
     {
         try
         {
-            var query = _context.Pricings
+            var query =await _context.Pricings
                 .Include(p => p.Plan) 
                 .OrderBy(x => x.PlanId)
                 .ProjectTo<PricingDto>(_mapper.ConfigurationProvider)
                 .AsNoTracking()
                 .PaginatedListAsync(request.PageNumber, request.PageSize, cancellationToken);
 
-            return await query;
+            return  query;
         }
         catch (Exception ex)
         {

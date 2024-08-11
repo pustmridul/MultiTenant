@@ -1,11 +1,9 @@
-﻿using Application.Com.Invoices.Commands.CreateInvoice;
-using Application.Com.Payments.Commands.CreatePayment;
-using Microsoft.AspNetCore.Http;
+﻿using Application.Com.Payments.Commands.CreatePayment;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
 {
-    
+
     [ApiController]
     public class PaymentsController : ApiControllerBase
     {

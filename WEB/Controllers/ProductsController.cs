@@ -1,15 +1,9 @@
-﻿using Application.Com.Plans.Commands.CreatePlan;
-using Application.Com.Plans.Commands.DeletePlan;
-using Application.Com.Plans.Commands.UpdatePlan;
-using Application.Com.Plans.Models;
-using Application.Com.Plans.Queries.GetPlan;
-using Application.Com.Products.Commands.CreateProduct;
+﻿using Application.Com.Products.Commands.CreateProduct;
 using Application.Com.Products.Commands.DeleteProduct;
 using Application.Com.Products.Commands.UpdateProduct;
 using Application.Com.Products.Models;
 using Application.Com.Products.Queries.GetProduct;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers

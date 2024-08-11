@@ -1,15 +1,9 @@
-﻿using Application.Com.Features.Commands.DeleteFeature;
-using Application.Com.Features.Commands.UpdateFeature;
-using Application.Com.PaymentMethods.Models;
-using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
-using Application.Com.Plans.Commands.CreatePlan;
+﻿using Application.Com.Plans.Commands.CreatePlan;
 using Application.Com.Plans.Commands.DeletePlan;
 using Application.Com.Plans.Commands.UpdatePlan;
 using Application.Com.Plans.Models;
 using Application.Com.Plans.Queries.GetPlan;
-using Application.Com.Users.Commands.CreateUser;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
@@ -30,9 +24,9 @@ namespace WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<int> Create([AsParameters] CreatePlanCommand query)
+        public async Task<IActionResult> Create(CreatePlanCommand command)
         {
-            return await Mediator.Send(query);
+            return Ok(await Mediator.Send(command));
         }
         [HttpPost]
         public async Task<IResult> Update(UpdatePlanCommand command)
