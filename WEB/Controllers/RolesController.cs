@@ -4,6 +4,7 @@ using Application.Com.Roles.Queries.GetRole;
 using Application.Com.Roles.Commands.CreateRole;
 using Application.Com.Roles.Commands.UpdateRole;
 using Application.Com.Roles.Commands.DeleteRole;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WEB.Controllers
 {
@@ -16,10 +17,9 @@ namespace WEB.Controllers
        public RolesController() { }
         [HttpGet]
 
-        public async Task<IList<RoleDto>> GetAll([FromQuery] GetRolesQuery query)
-
+        public async Task<IActionResult> GetAll()
         {
-            return await Mediator.Send(query);
+            return Ok( await Mediator.Send(new GetRolesQuery()));
         }
 
         [HttpPost]

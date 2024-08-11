@@ -5,7 +5,6 @@ using Application.Com.PaymentMethods.Models;
 using Application.Com.PaymentMethods.Queries.GetAllPaymentMethod;
 using Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
