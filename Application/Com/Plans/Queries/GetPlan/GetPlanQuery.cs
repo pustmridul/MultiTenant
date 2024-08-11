@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Application.Com.Plans.Queries.GetPlan;
 
 public record GetPlanQuery : IRequest<PaginatedList<PlanDto>>
-{
+{   public int Id { get; init; }
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }

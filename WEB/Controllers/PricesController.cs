@@ -4,6 +4,7 @@ using Application.Com.Features.Commands.UpdateFeature;
 using Application.Com.Features.Models;
 using Application.Com.Features.Queries.GetFeature;
 using Application.Com.Prices.Commands.CreatePrice;
+using Application.Com.Prices.Commands.DeletePrice;
 using Application.Com.Prices.Commands.UpdatePrice;
 using Application.Com.Prices.Models;
 using Application.Com.Prices.Queries.GetPrice;
@@ -43,11 +44,11 @@ namespace WEB.Controllers
             return Results.Ok();
         }
 
-        //[HttpDelete]
-        //public async Task<IResult> Delete(int id)
-        //{
-        //    await Mediator.Send(new DeletePriceCommand(id));
-        //    return Results.NoContent();
-        //}
+        [HttpDelete]
+        public async Task<IResult> Delete(int id)
+        {
+            await Mediator.Send(new DeletePriceCommand(id));
+            return Results.NoContent();
+        }
     }
 }
