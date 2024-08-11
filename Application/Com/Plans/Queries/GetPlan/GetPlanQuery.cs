@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Application.Com.Plans.Queries.GetPlan;
 
 public record GetPlanQuery : IRequest<PaginatedList<PlanDto>>
-{   public int Id { get; init; }
+{  
     public int PageNumber { get; init; } = 1;
     public int PageSize { get; init; } = 10;
 }
@@ -29,10 +29,12 @@ public class GetPlanQueryHandler : IRequestHandler<GetPlanQuery, PaginatedList<P
     {
         try
         {
-            return await _context.Plans
+            var data= await _context.Plans
+                .Include(i=>i.PlanFeatures)
            .OrderBy(x => x.Name)
            .ProjectTo<PlanDto>(_mapper.ConfigurationProvider)
            .PaginatedListAsync(request.PageNumber, request.PageSize, cancellationToken);
+            return data;
 
         }
         catch (Exception ex)

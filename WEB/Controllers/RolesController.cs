@@ -1,29 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Application.Com.Roles.Models;
-using Application.Com.Roles.Queries.GetRole;
-using Application.Com.Roles.Commands.CreateRole;
-using Application.Com.Roles.Commands.UpdateRole;
+﻿using Application.Com.Roles.Commands.CreateRole;
 using Application.Com.Roles.Commands.DeleteRole;
+using Application.Com.Roles.Commands.UpdateRole;
+using Application.Com.Roles.Queries.GetRole;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
 {
-    
+
     [ApiController]
     public class RolesController : ApiControllerBase
     {
-       public RolesController() { }
+        public RolesController() { }
         [HttpGet]
 
-        public async Task<IList<RoleDto>> GetAll([FromQuery] GetRolesQuery query)
-
+        public async Task<IActionResult> GetAll()
         {
-            return await Mediator.Send(query);
+            return Ok(await Mediator.Send(new GetRolesQuery()));
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateRoleCommand command)
         {
-            return Ok( await Mediator.Send(command));
+            return Ok(await Mediator.Send(command));
         }
         [HttpPut]
         public async Task<IResult> Update(UpdateRoleCommand command)

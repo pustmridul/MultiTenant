@@ -1,27 +1,21 @@
-﻿using Application.Com.Features.Commands.CreateFeature;
-using Application.Com.Features.Commands.DeleteFeature;
-using Application.Com.Features.Commands.UpdateFeature;
-using Application.Com.Features.Models;
-using Application.Com.Features.Queries.GetFeature;
-using Application.Com.Prices.Commands.CreatePrice;
-using Application.Com.Prices.Commands.DeletePrice;
+
+﻿using Application.Com.Prices.Commands.CreatePrice;
 using Application.Com.Prices.Commands.UpdatePrice;
 using Application.Com.Prices.Models;
 using Application.Com.Prices.Queries.GetPrice;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Application.Com.Prices.Commands.DeletePrice;
 namespace WEB.Controllers
 {
-   
+
     [ApiController]
-    public class PricesController :ApiControllerBase
+    public class PricesController : ApiControllerBase
     {
 
         public PricesController()
         {
-            
+
         }
         [HttpGet]
         public async Task<PaginatedList<PricingDto>> GetAll([FromQuery] GetPriceQuery query)
@@ -31,11 +25,11 @@ namespace WEB.Controllers
 
 
         [HttpPost]
-        public async Task<int> Create( CreatePriceCommand command)
+        public async Task<int> Create(CreatePriceCommand command)
         {
             return await Mediator.Send(command);
         }
-        [HttpPut]
+        [HttpPost]
         public async Task<IResult> Update(UpdatePriceCommand command)
         {
             if (command.Id == 0) return Results.BadRequest();

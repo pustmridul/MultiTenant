@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Com.Plans.Models;
 
 namespace Application.Com.Plans.Commands.CreatePlan;
 
-public record CreatePlanCommand : IRequest<int>
+public record CreatePlanCommand : IRequest<Result>
 {
     public string Name { get; init; } = string.Empty;
     public string? Description { get; init; }
+    public List<PlanFeatureDto> PlanFeatureDtos { get; init; } = new List<PlanFeatureDto>();
+
 }
-internal class CreatePlanCommandHandler : IRequestHandler<CreatePlanCommand, int>
+internal class CreatePlanCommandHandler : IRequestHandler<CreatePlanCommand, Result>
 {
     private readonly IAppDbContext _context;
 
@@ -20,19 +18,42 @@ internal class CreatePlanCommandHandler : IRequestHandler<CreatePlanCommand, int
         _context = context;
     }
 
-    public async Task<int> Handle(CreatePlanCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(CreatePlanCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Plan
+
+        using (var transaction = await _context.BeginTransactionAsync(cancellationToken))
         {
-            Name = request.Name,
-            Description = request.Description,
-            Pricings = new List<Pricing>(), // Initialize collections
-            PlanFeatures = new List<PlanFeature>() // Initialize collections
-        };
+            try
+            {
+                var obj = new Plan
+                {
+                    Name = request.Name,
+                    Description = request.Description,
+                };
+                _context.Plans.Add(obj);
+                await _context.SaveChangesAsync(cancellationToken);
+                foreach (var d in request.PlanFeatureDtos)
+                {
+                    var detail = new PlanFeature
+                    {
+                        PlanId = obj.Id,
+                        FeatureId = d.Id,
+                        IactiveFeature = d.IactiveFeature,
+                    };
+                    _context.PlanFeatures.Add(detail);
+                }
 
-        _context.Plans.Add(entity);
-        await _context.SaveChangesAsync(cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
 
-        return entity.Id;
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240801114805_2024-08-01-03")]
+    partial class _2024080103
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,26 +206,26 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1466),
+                            Created = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4569),
                             PermissionCode = "User.View",
                             PermissionText = "User",
-                            Updated = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1473)
+                            Updated = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4571)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1476),
+                            Created = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4573),
                             PermissionCode = "User.Create",
                             PermissionText = "User",
-                            Updated = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1476)
+                            Updated = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4574)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1478),
+                            Created = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4575),
                             PermissionCode = "User.Remove",
                             PermissionText = "User",
-                            Updated = new DateTime(2024, 8, 6, 5, 43, 57, 356, DateTimeKind.Utc).AddTicks(1478)
+                            Updated = new DateTime(2024, 8, 1, 11, 48, 5, 398, DateTimeKind.Utc).AddTicks(4576)
                         });
                 });
 

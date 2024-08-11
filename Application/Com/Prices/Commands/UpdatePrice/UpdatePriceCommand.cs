@@ -1,4 +1,6 @@
-﻿namespace Application.Com.Prices.Commands.UpdatePrice;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Application.Com.Prices.Commands.UpdatePrice;
 
 public class UpdatePriceCommand:IRequest<Result>
 {
@@ -21,7 +23,7 @@ public class UpdatePriceCommandHandler : IRequestHandler<UpdatePriceCommand, Res
         try
         {
             var entity= await _context.Pricings
-                .SingleOrDefaultAsync(q=>q.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(q=>q.Id== request.Id , cancellationToken);
             if (entity == null)
             {
                 Guard.Against.NotFound(request.Id, entity);
@@ -29,7 +31,6 @@ public class UpdatePriceCommandHandler : IRequestHandler<UpdatePriceCommand, Res
             }
             entity.Price = request.Price;
             entity.PlanId = request.PlanId;
-            _context.Pricings.Add(entity);
             await _context.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }

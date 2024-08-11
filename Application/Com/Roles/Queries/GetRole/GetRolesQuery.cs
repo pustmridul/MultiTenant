@@ -30,7 +30,7 @@ internal class GetRolesQueryHandler : IRequestHandler<GetRolesQuery, IList<RoleD
         try
         {
             var data= await _context.Roles
-            .Include(u => u.RolePermissions.Select(s=>s.Permission))
+            .Include(u => u.RolePermissions).ThenInclude(i=>i.Permission)
             .AsNoTracking()
             .ToListAsync();
 

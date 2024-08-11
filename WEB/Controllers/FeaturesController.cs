@@ -3,18 +3,12 @@ using Application.Com.Features.Commands.DeleteFeature;
 using Application.Com.Features.Commands.UpdateFeature;
 using Application.Com.Features.Models;
 using Application.Com.Features.Queries.GetFeature;
-using Application.Com.Plans.Models;
-using Application.Com.Plans.Queries.GetPlan;
-using Application.Com.TenantMethods.Commands.DeleteTenantMethod;
-using Application.Com.TenantMethods.Commands.UpdateTenantMethod;
-using Application.Com.Users.Commands.CreateUser;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WEB.Controllers
 {
-   
+
     [ApiController]
     public class FeaturesController : ApiControllerBase
     {

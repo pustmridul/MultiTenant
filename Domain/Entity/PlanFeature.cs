@@ -11,6 +11,7 @@ namespace Domain.Entity
     {
        public int PlanId {  get; set; }
        public int FeatureId { get; set; }
+        public bool IactiveFeature { get; set; }
         public Plan Plan { get; set; }
         public Feature Feature { get; set; }
     }
