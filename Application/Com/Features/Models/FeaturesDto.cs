@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Application.Com.Features.Models
 {
     public class FeaturesDto
-    {
+    {   public int Id { get; init; }
         public string Name { get; init; } = string.Empty;
         public string? Description { get; init; }
         private class FeatureMapping : Profile
@@ -17,7 +17,7 @@ namespace Application.Com.Features.Models
             public FeatureMapping()
             {
                 CreateMap<Feature, FeaturesDto>();
-               
+              
             }
         }
     }
