@@ -32,12 +32,13 @@ internal class CreatePlanCommandHandler : IRequestHandler<CreatePlanCommand, Res
                 };
                 _context.Plans.Add(obj);
                 await _context.SaveChangesAsync(cancellationToken);
+                
                 foreach (var d in request.PlanFeatureDtos)
                 {
                     var detail = new PlanFeature
                     {
                         PlanId = obj.Id,
-                        FeatureId = d.Id,
+                        FeatureId = d.FeatureId,
                         IactiveFeature = d.IactiveFeature,
                     };
                     _context.PlanFeatures.Add(detail);
